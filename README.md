@@ -1,9 +1,10 @@
 [TOC]
+
 # NgD3Slider
 ----------
 Unlike the regular and boring html input range slider, this baby is pure **SVG** created using **Angular4** modularity combined with **D3.js v4** capabilities
-Check out the [Demo](https://embed.plnkr.co/JQo42K/) on Plunker
-Check out the [source code](https://github.com/arbelzinger/ng-d3-slider.git) on Github
+Check out the <a href="https://embed.plnkr.co/JQo42K/" target="_blank">Demo</a> on Plunker
+Check out the <a href="https://github.com/arbelzinger/ng-d3-slider.git" target="_blank">source code</a> on Github
 
 *Easy to modify Easy to style*
 
@@ -59,7 +60,8 @@ Examples
 <a id="value"></a>
 **Playing with values**
 ```
-<div ngD3Slider id="slider2" [length]="200" [maxValue]="200" [minValue]="100" [initialValue]="150 (selectedValue)="selectedValue($event)"></div>
+<div ngD3Slider id="slider2" [length]="200" [maxValue]="200" [minValue]="100" [initialValue]="150
+(selectedValue)="selectedValue($event)"></div>
 ```
 * `maxValue` should alway be greater than `minValue`
 * `initialValue` should alway be greater than `minValue` and smaller than `maxValue`
@@ -68,7 +70,8 @@ Examples
 <a id="style"></a>
 **Styling the slider**
 ```
-<div ngD3Slider id="slider3" [length]="200" [lineWidth]="7" [color]="'#456789'" [emptyColor]="'orange'" [thumbColor]="'pink'" [thumbSize]="8"></div>
+<div ngD3Slider id="slider3" [length]="200" [lineWidth]="7" [color]="'#456789'" [emptyColor]="'orange'"
+ [thumbColor]="'pink'" [thumbSize]="8"></div>
 ```
 * `color`, `emptyColor` and `thumbColor` could be given hex,rgb,rgba or html color strings
 * `thumbSize` maximum value is 10
@@ -76,14 +79,16 @@ Examples
 <a id="direction"></a>
 **Change direction of slider**
 ```
-<div ngD3Slider id="slider4" [length]="200" [direction]="'RTL'" ></div>
+<div ngD3Slider id="slider4" [length]="200" [direction]="'RTL'" >
+</div>
 ```
 * `direction` possible values are `RTL` and `LTR`
 
 <a id="vertical"></a>
 **Vertical slider**
 ```
-<div ngD3Slider id="slider5" [length]="200" [vertical]="'true'" ></div>
+<div ngD3Slider id="slider5" [length]="200" [vertical]="'true'" >
+</div>
 ```
 <a id="disable"></a>
      **Disable slider**
