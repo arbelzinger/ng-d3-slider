@@ -1,6 +1,6 @@
 {
   "name": "ng-d3-slider",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author":"Arbel Zinger <arbelzinger@gmail.com>",
   "license": "MIT",
   "keywords": ["Angular 2","Angular 4","d3","d3.js","slider","range","input range"],

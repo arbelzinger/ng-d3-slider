@@ -97,7 +97,11 @@ export class D3SliderDirective implements OnInit, OnChanges{
     }
     var selectedValue;
 
-    function dragEnded() {
+    function dragStart(){
+      valueCircle.attr("r", thumbSize+1);
+    }
+
+    function drag() {
       selectedValue = d3.event[mainAxis];
       if (selectedValue < 0)
         selectedValue = 0;
@@ -112,6 +116,10 @@ export class D3SliderDirective implements OnInit, OnChanges{
         event(NormValue);
 
       d3.event.sourceEvent.stopPropagation();
+    }
+
+    function dragEnd(){
+      valueCircle.attr("r", thumbSize);
     }
 
     //Line to represent the current value
@@ -144,7 +152,12 @@ export class D3SliderDirective implements OnInit, OnChanges{
       .style("fill", thumbColor);
 
     if(that.disable!="disable"){
-      valueCircle.call(d3.drag().on("drag", dragEnded)).style("cursor","hand");
+      valueCircle.call(d3.drag()
+          .on("start", dragStart)
+          .on("drag", drag)
+          .on("end", dragEnd))
+          .style("cursor","hand");
+
     }
 
     function event(iNewValue){
