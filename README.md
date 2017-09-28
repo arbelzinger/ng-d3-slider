@@ -1,41 +1,41 @@
-[TOC]
 
 # NgD3Slider
 ----------
 Unlike the regular and boring html input range slider, this baby is pure **SVG** created using **Angular4** modularity combined with **D3.js v4** capabilities
+
 Check out the <a href="https://embed.plnkr.co/JQo42K/" target="_blank">Demo</a> on Plunker
+
 Check out the <a href="https://github.com/arbelzinger/ng-d3-slider.git" target="_blank">source code</a> on Github
 
 *Easy to modify Easy to style*
 
 Install
 -------------
-----------
 > $ npm install ng-d3-slider --save
 
-Then add the following code at the top of your `app.module.ts file`
+Then add the following code at the top of your `app.module.ts` file
 ```
 import {D3SliderDirective} from 'ng-d3-slider/d3-slider.directive'
 ```
 And you're good to go!!!
 
 ----------
+
 How to use
 -------------
-----------
 
 **First try**
 
-For a simple default all you gotta do is add the directive name to a div with an 'id' attr and an Angular input attr called 'length' with a number value
+For a simple default slider all you gotta do is add the directive name to a div with an `id` attr and an Angular input attr called `length` with a number value
 *Example:*
 ```
  <div ngD3Slider id="slider1"  [length]="200"></div>
 ```
-Now you can *play*  with the slider by adding all the possible attributes suggested below
+Now you can *play*   with the slider by adding all the possible attributes suggested below
 
 List of Attributes
 ----------------------
-----------
+
 
 |Attribute Type| Key             | Type   | Default value|Example     |
 |--------------|:----------------|:-------|--------------|--------|
@@ -56,7 +56,7 @@ List of Attributes
 
 Examples
 ----------------------
-----------
+
 <a id="value"></a>
 **Playing with values**
 ```
