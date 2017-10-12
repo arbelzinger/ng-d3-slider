@@ -43,6 +43,7 @@ List of Attributes
 |Input         |`[length]`       |number  |**- required**|[example](#value)|
 |Input         |`[maxValue]`     |number  | `1`          |[example](#value)|
 |Input         |`[minValue]`     |number  | `0`          |[example](#value)|
+|Input         |`[step]`         |number  | `1`          |[example](#value)|
 |Input         |`[initialValue]` |number  | `null`       |[example](#value)|
 |Input         |`[lineWidth]`    |number  |  `6`         |[example](#style)|
 |Input         |`[color]`        |string  | `"#51CB3F"`  |[example](#style)|
@@ -60,17 +61,19 @@ Examples
 <a id="value"></a>
 **Playing with values**
 ```
-<div ngD3Slider id="slider2" [length]="200" [maxValue]="200" [minValue]="100" [initialValue]="150
+<div ngD3Slider id="slider2" [length]="200" [maxValue]="200"
+[step]="5" [minValue]="100" [initialValue]="150"
 (selectedValue)="selectedValue($event)"></div>
 ```
-* `maxValue` should alway be greater than `minValue`
-* `initialValue` should alway be greater than `minValue` and smaller than `maxValue`
+* `maxValue` should always be greater than `minValue`
+* `initialValue` should always be greater than `minValue` and smaller than `maxValue`
 *  `selectedValue` returns the value selected after the slider's thumb is released
 
 <a id="style"></a>
 **Styling the slider**
 ```
-<div ngD3Slider id="slider3" [length]="200" [lineWidth]="7" [color]="'#456789'" [emptyColor]="'orange'"
+<div ngD3Slider id="slider3" [length]="200" [lineWidth]="7"
+ [color]="'#456789'" [emptyColor]="'orange'"
  [thumbColor]="'pink'" [thumbSize]="8"></div>
 ```
 * `color`, `emptyColor` and `thumbColor` could be given hex,rgb,rgba or html color strings

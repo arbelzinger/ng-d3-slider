@@ -1,6 +1,6 @@
 import {
-  Directive, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitter, ElementRef,
-  ViewContainerRef
+    Directive, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitter, ElementRef,
+    ViewContainerRef
 } from '@angular/core';
 import * as d3 from 'd3'
 
@@ -15,6 +15,7 @@ export class D3SliderDirective implements OnInit, OnChanges{
   @Input() maxValue:number;
   @Input() minValue:number;
   @Input() initialValue:number;
+  @Input() step:number;
   @Input() lineWidth:number;
   @Input() color:string;
   @Input() emptyColor:string;
@@ -31,6 +32,7 @@ export class D3SliderDirective implements OnInit, OnChanges{
     this.minValue = 0;
     this.value;
     this.initialValue = null;
+    this.step = 1;
     this.color = "#51CB3F";
     this.emptyColor = "#ECECEC";
     this.thumbColor = "white";
@@ -85,7 +87,11 @@ export class D3SliderDirective implements OnInit, OnChanges{
     var thumbColor = this.thumbColor;
     var lineWidth = this.lineWidth;
     var thumbSize = this.thumbSize;
-    var NormValue = this.setNormValue(value,minValue,maxValue,direction);// value normalized between 0-1
+    var normStep = this.step;
+    if(normStep>maxValue){
+      normStep = 1
+    }
+    var normValue = this.setNormValue(value,minValue,maxValue,direction);// value normalized between 0-1
     var mainAxis;
     var secondaryAxis;
     if(this.vertical=="true"){
@@ -107,13 +113,13 @@ export class D3SliderDirective implements OnInit, OnChanges{
         selectedValue = 0;
       else if (selectedValue > width)
         selectedValue = width;
-
-      NormValue = selectedValue/ width;
+      selectedValue= selectedValue - (selectedValue%normStep);
+      normValue = selectedValue/ width;
       valueCircle.attr("c"+mainAxis, selectedValue);
-      valueLine.attr(mainAxis+"2",width * NormValue);
-      emptyLine.attr(mainAxis+"1", width * NormValue);
+      valueLine.attr(mainAxis+"2",selectedValue);
+      emptyLine.attr(mainAxis+"1", selectedValue);
       if (event)
-        event(NormValue);
+        event(normValue);
 
       d3.event.sourceEvent.stopPropagation();
     }
@@ -124,32 +130,32 @@ export class D3SliderDirective implements OnInit, OnChanges{
 
     //Line to represent the current value
     var valueLine = selection.append("line")
-      .attr(mainAxis+"1", 0)
-      .attr(mainAxis+"2", width * NormValue)
-      .attr(secondaryAxis+"1", 10)
-      .attr(secondaryAxis+"2", 10)
-      .style("stroke", color)
-      .style("stroke-linecap", "round")
-      .style("stroke-width", lineWidth);
+        .attr(mainAxis+"1", 0)
+        .attr(mainAxis+"2", width * normValue)
+        .attr(secondaryAxis+"1", 10)
+        .attr(secondaryAxis+"2", 10)
+        .style("stroke", color)
+        .style("stroke-linecap", "round")
+        .style("stroke-width", lineWidth);
 
     //Line to show the remaining value
     var emptyLine = selection.append("line")
-      .attr(mainAxis+"1", width * NormValue)
-      .attr(mainAxis+"2", width)
-      .attr(secondaryAxis+"1", 10)
-      .attr(secondaryAxis+"2", 10)
-      .style("stroke", emptyColor)
-      .style("stroke-linecap", "round")
-      .style("stroke-width", lineWidth);
+        .attr(mainAxis+"1", width * normValue)
+        .attr(mainAxis+"2", width)
+        .attr(secondaryAxis+"1", 10)
+        .attr(secondaryAxis+"2", 10)
+        .style("stroke", emptyColor)
+        .style("stroke-linecap", "round")
+        .style("stroke-width", lineWidth);
 
     //Draggable circle to represent the current value
     var valueCircle = selection.append("circle")
-      .attr("c"+mainAxis, width * NormValue)
-      .attr("c"+secondaryAxis, 10)
-      .attr("r", thumbSize)
-      .style("stroke", "black")
-      .style("stroke-width",1)
-      .style("fill", thumbColor);
+        .attr("c"+mainAxis, width * normValue)
+        .attr("c"+secondaryAxis, 10)
+        .attr("r", thumbSize)
+        .style("stroke", "black")
+        .style("stroke-width",1)
+        .style("fill", thumbColor);
 
     if(that.disable!="disable"){
       valueCircle.call(d3.drag()
